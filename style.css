@@ -48,7 +48,7 @@ body {
     color: #f5f6f7;
     background-color: #2a4b8c;
     box-shadow: 0px 1px 10px 1px rgba(42,75,140,0.5);
-    border-radius: 16px 16px 16px 16px;
+    border-radius: 14px;
     transition: ease-in-out 0.15s;
 }
 
@@ -57,13 +57,13 @@ body {
 }
 
 .header-link-active {
-    border-radius: 12px 12px 12px 12px;
+    border-radius: 8px;
 }
 
 .header-link:hover {
     background-color: rgba(42, 75, 140, 0.5);
     box-shadow: 0px 1px 10px 1px rgba(42, 75, 140, 0.5);
-    border-radius: 12px 12px 12px 12px;
+    border-radius: 8px;
     transition: ease-in-out 0.15s;
     transform: scale(1.1);
     transform-origin: bottom;
@@ -80,4 +80,95 @@ body {
     align-items: center;
     padding: 10px;
     margin-top: auto;
+}
+
+.about-section {
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.terminal-window {
+    width: 100%;
+    max-width: 700px;
+    background-color: #2d2d2d;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(14, 26, 46, 0.75);
+    overflow: hidden;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.terminal-header {
+    background-color: #3d3d3d;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.red { background-color: #ff5f56; }
+.yellow { background-color: #ffbd2e; }
+.green { background-color: #27c93f; }
+
+.terminal-title {
+    color: #aaa;
+    font-size: 0.9rem;
+    margin-left: 10px;
+}
+
+.terminal-body {
+    padding: 20px;
+    color: #f0f0f0;
+    line-height: 1.6;
+}
+
+.prompt {
+    color: #50fa7b;
+    font-weight: bold;
+}
+
+.response {
+    color: #f8f8f2;
+    margin-bottom: 20px;
+    margin-left: 10px;
+}
+
+.response-tags {
+    margin: 10px 0 20px 10px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.response-tags span {
+    background-color: #44475a;
+    color: #8be9fd;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 2px;
+    padding-bottom: 1px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.response-tags .ls-folder {
+    color: #4da6ff;
+}
+
+.cursor {
+    display: inline-block;
+    width: 10px;
+    background-color: #f8f8f2;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
 }
