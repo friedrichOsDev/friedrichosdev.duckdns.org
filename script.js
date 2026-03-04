@@ -28,7 +28,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const finalPrompt = document.querySelector('.cursor').parentElement;
 
     const typingSpeed = 100;
-    const responseDelay = 300;
+    const responseDelay = 100;
+    const newPromptDelay = 500;
 
     for (let i = 0; i < commandElements.length; i++) {
         commandElements[i].parentElement.style.display = 'none';
@@ -38,6 +39,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     async function typeText(element, text) {
         element.parentElement.style.display = 'block';
+
+        await new Promise(resolve => setTimeout(resolve, newPromptDelay));
+
         for (let i = 0; i < text.length; i++) {
             element.textContent += text[i];
             await new Promise(resolve => setTimeout(resolve, typingSpeed));
