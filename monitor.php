@@ -54,12 +54,12 @@ if (isset($_GET['data'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FriedrichOsDev - Monitor</title>
+    <title>FriedrichOsDev</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header class="header">
-        <p>FriedrichOsDev - Monitor</p>
+        <p>Monitor</p>
         <div>
             <a class="button-link" href="index.html">Home</a>
             <a class="button-link" href="projects.html">Projects</a>
