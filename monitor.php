@@ -70,56 +70,56 @@ if (isset($_GET['data'])) {
     <main>
         <section class="monitor-section">
             <div class="monitor-grid">
-                <div class="terminal-window monitor-card">
+                <div class="monitor-card">
                     <div class="terminal-header">
                         <span class="dot red"></span>
                         <span class="dot yellow"></span>
                         <span class="dot green"></span>
                         <span class="terminal-title">cpu_usage.sh</span>
                     </div>
-                    <div class="terminal-body">
+                    <div class="card-content">
                         <div id="cpuText" class="monitor-value">0%</div>
                         <div class="progress-container">
                             <div id="cpuBar" class="progress-bar"></div>
                         </div>
                     </div>
                 </div>
-                <div class="terminal-window monitor-card">
+                <div class="monitor-card">
                     <div class="terminal-header">
                         <span class="dot red"></span>
                         <span class="dot yellow"></span>
                         <span class="dot green"></span>
                         <span class="terminal-title">mem_info.py</span>
                     </div>
-                    <div class="terminal-body">
+                    <div class="card-content">
                         <div id="ramText" class="monitor-value">0%</div>
                         <div class="progress-container">
                             <div id="ramBar" class="progress-bar"></div>
                         </div>
                     </div>
                 </div>
-                <div class="terminal-window monitor-card">
+                <div class="monitor-card">
                     <div class="terminal-header">
                         <span class="dot red"></span>
                         <span class="dot yellow"></span>
                         <span class="dot green"></span>
                         <span class="terminal-title">disk_status.asm</span>
                     </div>
-                    <div class="terminal-body">
+                    <div class="card-content">
                         <div id="diskText" class="monitor-value">0%</div>
                         <div class="progress-container">
                             <div id="diskBar" class="progress-bar"></div>
                         </div>
                     </div>
                 </div>
-                <div class="terminal-window monitor-card sys-info-card">
+                <div class="monitor-card sys-info-card">
                     <div class="terminal-header">
                         <span class="dot red"></span>
                         <span class="dot yellow"></span>
                         <span class="dot green"></span>
                         <span class="terminal-title">system_info.sh</span>
                     </div>
-                    <div class="terminal-body system-info">
+                    <div class="card-content system-info">
                         <p><span class="prompt">OS:</span> <span>Linux</span></p>
                         <p><span class="prompt">Kernel:</span> <span id="kernelName">...</span></p>
                         <p><span class="prompt">Uptime:</span> <span id="uptimeText">...</span></p>
