@@ -2,14 +2,13 @@
 if (isset($_GET['data'])) {
     header("Content-Type: application/json");
 
-    // CPU Messung
     function getCPU() {
         $stat1 = file('/proc/stat');
         $cpu1 = preg_split('/\s+/', trim($stat1[0]));
         $total1 = array_sum(array_slice($cpu1, 1));
         $idle1 = $cpu1[4];
 
-        usleep(250000); // Kürzere Messzeit für bessere UX im Web
+        usleep(250000);
 
         $stat2 = file('/proc/stat');
         $cpu2 = preg_split('/\s+/', trim($stat2[0]));
@@ -23,7 +22,6 @@ if (isset($_GET['data'])) {
         return round((1 - ($idleDiff / $totalDiff)) * 100, 1);
     }
 
-    // RAM Messung
     $meminfo = file_get_contents("/proc/meminfo");
     preg_match('/MemTotal:\s+(\d+)/', $meminfo, $total);
     preg_match('/MemAvailable:\s+(\d+)/', $meminfo, $available);
@@ -32,12 +30,10 @@ if (isset($_GET['data'])) {
     $freeMem = $available[1] ?? 0;
     $ramPercent = round((($totalMem - $freeMem) / $totalMem) * 100, 1);
 
-    // DISK Messung
     $diskTotal = disk_total_space("/");
     $diskFree = disk_free_space("/");
     $diskPercent = round((($diskTotal - $diskFree) / $diskTotal) * 100, 1);
 
-    // System Info
     $uptime = shell_exec("uptime -p");
     $kernel = php_uname('r');
 
@@ -74,7 +70,6 @@ if (isset($_GET['data'])) {
     <main>
         <section class="monitor-section">
             <div class="monitor-grid">
-                <!-- CPU Card -->
                 <div class="terminal-window monitor-card">
                     <div class="terminal-header">
                         <span class="dot red"></span>
@@ -89,8 +84,6 @@ if (isset($_GET['data'])) {
                         </div>
                     </div>
                 </div>
-
-                <!-- RAM Card -->
                 <div class="terminal-window monitor-card">
                     <div class="terminal-header">
                         <span class="dot red"></span>
@@ -105,8 +98,6 @@ if (isset($_GET['data'])) {
                         </div>
                     </div>
                 </div>
-
-                <!-- Disk Card -->
                 <div class="terminal-window monitor-card">
                     <div class="terminal-header">
                         <span class="dot red"></span>
@@ -121,9 +112,7 @@ if (isset($_GET['data'])) {
                         </div>
                     </div>
                 </div>
-
-                <!-- System Info Card -->
-                <div class="terminal-window monitor-card">
+                <div class="terminal-window monitor-card sys-info-card">
                     <div class="terminal-header">
                         <span class="dot red"></span>
                         <span class="dot yellow"></span>
@@ -132,7 +121,7 @@ if (isset($_GET['data'])) {
                     </div>
                     <div class="terminal-body system-info">
                         <p><span class="prompt">OS:</span> <span>Linux</span></p>
-                        <p><span class="prompt">Kernel:</span> <span><?php echo php_uname('r'); ?></span></p>
+                        <p><span class="prompt">Kernel:</span> <span id="kernelName">...</span></p>
                         <p><span class="prompt">Uptime:</span> <span id="uptimeText">...</span></p>
                         <p><span class="prompt">Server Time:</span> <span id="timeText">...</span></p>
                         <p><span class="prompt">Status:</span> <span style="color: #50fa7b;">Online</span></p>
@@ -144,7 +133,6 @@ if (isset($_GET['data'])) {
     <footer class="footer">
         <p>&copy; 2026 FriedrichOsDev. All rights reserved.</p>
     </footer>
-
     <script>
         async function updateStats() {
             try {
@@ -154,6 +142,7 @@ if (isset($_GET['data'])) {
                 updateDisplay("cpu", data.cpu);
                 updateDisplay("ram", data.ram);
                 updateDisplay("disk", data.disk);
+                document.getElementById("kernelName").innerText = data.kernel;
                 document.getElementById("uptimeText").innerText = data.uptime.replace('uptime ', '');
                 document.getElementById("timeText").innerText = data.time;
             } catch (error) {
@@ -166,11 +155,9 @@ if (isset($_GET['data'])) {
             const barEl = document.getElementById(id + "Bar");
             
             if (textEl && barEl) {
-                // Smooth Counter Effekt
                 animateValue(textEl, value);
                 barEl.style.width = value + "%";
                 
-                // Farbe ändern wenn Auslastung hoch ist
                 if (value > 85) barEl.style.background = "#ff5f56";
                 else if (value > 60) barEl.style.background = "#ffbd2e";
                 else barEl.style.background = "linear-gradient(90deg, #50fa7b, #8be9fd)";
@@ -181,8 +168,7 @@ if (isset($_GET['data'])) {
             el.innerText = newValue + "%";
         }
 
-        // Update alle 2 Sekunden (wegen CPU Messintervall)
-        setInterval(updateStats, 2000);
+        setInterval(updateStats, 1000);
         updateStats();
     </script>
 </body>

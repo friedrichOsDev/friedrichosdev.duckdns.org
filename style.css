@@ -356,16 +356,28 @@ body {
     display: flex;
     align-items: center;
     padding: 20px;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     width: 100%;
+    justify-content: center;
 }
 
 .monitor-grid {
     width: 100%;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 30px;
+}
+
+.monitor-card {
+    flex: 0 0 300px;
+}
+
+.sys-info-card {
+    flex: 0 1 auto;
+    width: fit-content;
+    min-width: 300px;
 }
 
 .monitor-card .terminal-body {
@@ -384,8 +396,6 @@ body {
 .system-info p {
     margin: 8px 0;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .monitor-value {
@@ -410,4 +420,37 @@ body {
     background: linear-gradient(90deg, #50fa7b, #8be9fd);
     transition: width 0.5s ease-in-out;
     box-shadow: 0 0 10px rgba(80, 250, 123, 0.3);
+}
+
+/**
+ * contact.html
+ */
+
+.contact-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 12px 25px;
+    margin-top: 20px;
+}
+
+.contact-key {
+    color: #bd93f9;
+    font-weight: bold;
+}
+
+.contact-value a {
+    color: #8be9fd;
+    text-decoration: none;
+}
+
+.contact-value a:hover {
+    text-decoration: underline;
 }
