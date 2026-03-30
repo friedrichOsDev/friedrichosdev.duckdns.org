@@ -346,3 +346,68 @@ body {
     display: flex;
     justify-content: flex-end;
 }
+
+/**
+ * monitor.php
+ */
+
+.monitor-section {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.monitor-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.monitor-card .terminal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+}
+
+.monitor-card .system-info {
+    align-items: flex-start;
+    padding: 20px;
+    font-size: 1.1rem;
+}
+
+.system-info p {
+    margin: 8px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.monitor-value {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #50fa7b;
+    margin-bottom: 20px;
+}
+
+.progress-container {
+    width: 100%;
+    height: 12px;
+    background-color: #44475a;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #1a1a1a;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #50fa7b, #8be9fd);
+    transition: width 0.5s ease-in-out;
+    box-shadow: 0 0 10px rgba(80, 250, 123, 0.3);
+}
