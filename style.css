@@ -1,3 +1,7 @@
+/**
+ * Global Style
+ */
+
 body {
     background: radial-gradient(ellipse at top, #0E1A2E 0%, #0a0908 75%, #0a0908 100%) no-repeat fixed;
     min-height: 100vh;
@@ -9,6 +13,33 @@ body {
     font-weight: normal;
     font-size: medium;
     color: #f5f6f7;
+}
+
+.button-link {
+    display: inline-block;
+    font-size: 18px;
+    margin-right: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    text-decoration: none;
+    color: #f5f6f7;
+    background-color: #2a4b8c;
+    box-shadow: 0px 1px 10px 1px rgba(42,75,140,0.5);
+    border-radius: 14px;
+    transition: ease-in-out 0.15s;
+}
+
+.button-link:hover {
+    background-color: rgba(42, 75, 140, 0.5);
+    box-shadow: 0px 1px 10px 1px rgba(42, 75, 140, 0.5);
+    border-radius: 8px;
+    transition: ease-in-out 0.15s;
+    transform: scale(1.1);
+    transform-origin: center;
 }
 
 .header {
@@ -34,44 +65,12 @@ body {
     padding: 5px;
 }
 
-.header-link {
-    display: inline-block;
-    font-size: 18px;
-    margin-right: 15px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    text-decoration: none;
-    color: #f5f6f7;
-    background-color: #2a4b8c;
-    box-shadow: 0px 1px 10px 1px rgba(42,75,140,0.5);
-    border-radius: 14px;
-    transition: ease-in-out 0.15s;
-}
-
 .header-link-last {
     margin-right: 5px;
 }
 
 .header-link-active {
     border-radius: 8px;
-}
-
-.header-link:hover {
-    background-color: rgba(42, 75, 140, 0.5);
-    box-shadow: 0px 1px 10px 1px rgba(42, 75, 140, 0.5);
-    border-radius: 8px;
-    transition: ease-in-out 0.15s;
-    transform: scale(1.1);
-    transform-origin: bottom;
-}
-
-.header-link:active {
-    transform: scale(1);
-    transition: transform 0.05s;
 }
 
 .footer {
@@ -81,6 +80,10 @@ body {
     padding: 10px;
     margin-top: auto;
 }
+
+/**
+ * index.html
+ */
 
 .about-section {
     display: flex;
@@ -240,4 +243,52 @@ body {
 @keyframes blink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
+}
+
+/**
+ * projects.html
+ */
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.project-card {
+    position: relative;
+    height: 200px;
+    background: #2a2a2a;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid #444;
+}
+
+.project-head {
+    padding: 20px;
+    color: #888;
+}
+
+.project-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+
+.project-card:hover .project-overlay {
+    opacity: 1;
 }
