@@ -127,7 +127,14 @@ body {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(14, 26, 46, 0.75);
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
     font-family: 'Courier New', Courier, monospace;
+    transition: transform 0.2s ease;
+}
+
+.terminal-window:hover {
+    transform: translateY(-5px);
 }
 
 .terminal-header {
@@ -347,6 +354,7 @@ body {
     box-shadow: 0 0 10px var(--shadow-color);
     font-family: 'Courier New', Courier, monospace;
     border: none;
+    transition: transform 0.2s ease;
 }
 
 .project-content {
@@ -405,6 +413,10 @@ body {
 
 .project-card:hover .project-overlay {
     opacity: 1;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
 }
 
 .project-overlay .prompt {
