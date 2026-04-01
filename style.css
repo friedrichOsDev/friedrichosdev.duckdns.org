@@ -206,65 +206,38 @@ body {
     color: var(--folder-blue);
 }
 
-.response-tags .language-asm {
-    color: var(--asm-orange);
+.response-tags a {
     cursor: pointer;
     text-decoration: none;
-    
+    transition: text-decoration 0.2s ease;
 }
 
-.response-tags .language-asm:hover {
+.response-tags a:hover {
     text-decoration: underline;
+}
+
+.response-tags .language-asm {
+    color: var(--asm-orange);
 }
 
 .response-tags .language-c {
     color: var(--prompt-green);
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.response-tags .language-c:hover {
-    text-decoration: underline;
 }
 
 .response-tags .language-python {
     color: var(--python-purple);
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.response-tags .language-python:hover {
-    text-decoration: underline;
 }
 
 .response-tags .language-css {
     color: var(--css-pink);
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.response-tags .language-css:hover {
-    text-decoration: underline;
 }
 
 .response-tags .language-html {
     color: var(--html-yellow);
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.response-tags .language-html:hover {
-    text-decoration: underline;
 }
 
 .response-tags .language-js {
     color: var(--html-yellow);
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.response-tags .language-js:hover {
-    text-decoration: underline;
 }
 
 .cursor {
@@ -354,6 +327,7 @@ body {
     box-shadow: 0 0 10px var(--shadow-color);
     font-family: 'Courier New', Courier, monospace;
     border: none;
+    will-change: transform;
     transition: transform 0.2s ease;
 }
 
