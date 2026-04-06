@@ -62,7 +62,7 @@ if (isset($_GET['data'])) {
     <header class="header">
         <p>Monitor</p>
         <div>
-            <a class="button-link" href="index.html">Home</a>
+            <a class="button-link" href="index.php">Home</a>
             <a class="button-link" href="projects.html">Projects</a>
             <a class="button-link header-link-active" href="monitor.php">Monitor</a>
             <a class="button-link header-link-last" href="contact.html">Contact</a>

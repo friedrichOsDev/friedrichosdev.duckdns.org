@@ -7,7 +7,6 @@
         $stmt->execute([$ip]);
         $stmt = $pdo->query("SELECT SUM(count) as total FROM visitors");
         $visitorCount = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
-        echo "<script>console.log('Total visitors: " . $visitorCount . "');</script>";
     } catch (PDOException $e) {
         error_log($e->getMessage());
     }
@@ -25,7 +24,7 @@
     <header class="header">
         <p>Home</p>
         <div>
-            <a class="button-link header-link-active" href="index.html">Home</a>
+            <a class="button-link header-link-active" href="index.php">Home</a>
             <a class="button-link" href="projects.html">Projects</a>
             <a class="button-link" href="monitor.php">Monitor</a>
             <a class="button-link header-link-last" href="contact.html">Contact</a>
