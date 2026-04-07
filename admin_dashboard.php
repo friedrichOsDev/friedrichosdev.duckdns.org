@@ -14,6 +14,9 @@ try {
 
     $stmt = $pdo->query("SELECT ip, count, last_visit FROM visitors ORDER BY last_visit DESC");
     $visitors = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $stmt = $pdo->query("SELECT id, username, password_hash FROM admins");
+    $admins = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     $error = "Datenbankverbindung fehlgeschlagen: " . $e->getMessage();
 }
@@ -43,6 +46,40 @@ try {
     <main>
         <section class="dashboard-section">
             <div class="terminal-window admin-window">
+                <div class="terminal-header">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                    <span class="terminal-title">admins.db</span>
+                </div>
+                <div class="terminal-body">
+                    <?php if (isset($error)): ?>
+                        <p class="error-active"><?php echo $error; ?></p>
+                    <?php else: ?>
+                        <div class="table-container">
+                            <table class="visitors-table">
+                                <thead>
+                                    <tr>
+                                        <th>Admin ID</th>
+                                        <th>Username</th>
+                                        <th>Password Hash</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($admins as $admin): ?>
+                                        <tr>
+                                            <td class="ip-cell"><?php echo htmlspecialchars($admin['id']); ?></td>
+                                            <td class="count-cell"><?php echo htmlspecialchars($admin['username']); ?></td>
+                                            <td class="date-cell"><?php echo htmlspecialchars($admin['password_hash']); ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <div class="terminal-window admin-window last-window">
                 <div class="terminal-header">
                     <div class="dot red"></div>
                     <div class="dot yellow"></div>
