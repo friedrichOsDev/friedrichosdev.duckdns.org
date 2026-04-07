@@ -1,52 +1,63 @@
 <?php
-if (isset($_GET['data'])) {
-    header("Content-Type: application/json");
+    if (isset($_GET['data'])) {
+        header('Content-Type: application/json');
+        header('Access-Control-Allow-Origin: *');
 
-    function getCPU() {
-        $stat1 = file('/proc/stat');
-        $cpu1 = preg_split('/\s+/', trim($stat1[0]));
-        $total1 = array_sum(array_slice($cpu1, 1));
-        $idle1 = $cpu1[4];
+        function getCPU() {
+            $stat1 = file('/proc/stat');
+            $cpu1 = preg_split('/\s+/', trim($stat1[0]));
+            $total1 = array_sum(array_slice($cpu1, 1));
+            $idle1 = $cpu1[4];
 
-        usleep(250000);
+            usleep(250000);
 
-        $stat2 = file('/proc/stat');
-        $cpu2 = preg_split('/\s+/', trim($stat2[0]));
-        $total2 = array_sum(array_slice($cpu2, 1));
-        $idle2 = $cpu2[4];
+            $stat2 = file('/proc/stat');
+            $cpu2 = preg_split('/\s+/', trim($stat2[0]));
+            $total2 = array_sum(array_slice($cpu2, 1));
+            $idle2 = $cpu2[4];
 
-        $totalDiff = $total2 - $total1;
-        $idleDiff = $idle2 - $idle1;
+            $totalDiff = $total2 - $total1;
+            $idleDiff = $idle2 - $idle1;
 
-        if ($totalDiff == 0) return 0;
-        return round((1 - ($idleDiff / $totalDiff)) * 100, 1);
+            if ($totalDiff == 0) return 0;
+            return round((1 - ($idleDiff / $totalDiff)) * 100, 1);
+        }
+
+        $meminfo = file_get_contents("/proc/meminfo");
+        preg_match('/MemTotal:\s+(\d+)/', $meminfo, $total);
+        preg_match('/MemAvailable:\s+(\d+)/', $meminfo, $available);
+
+        $totalMem = $total[1] ?? 1;
+        $freeMem = $available[1] ?? 0;
+        $ramPercent = round((($totalMem - $freeMem) / $totalMem) * 100, 1);
+
+        $diskTotal = disk_total_space("/");
+        $diskFree = disk_free_space("/");
+        $diskPercent = round((($diskTotal - $diskFree) / $diskTotal) * 100, 1);
+
+        $uptime = shell_exec("uptime -p");
+        $kernel = php_uname('r');
+
+        require_once('/var/www/db_config.php');
+        try {
+            $pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
+            $stmt = $pdo->query("SELECT SUM(count) as total FROM visitors");
+            $visitorCount = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+        } catch (PDOException $e) {
+            error_log($e->getMessage());
+        }
+
+        echo json_encode([
+            "cpu" => getCPU(),
+            "ram" => $ramPercent,
+            "disk" => $diskPercent,
+            "uptime" => trim($uptime),
+            "kernel" => $kernel,
+            "time" => date("H:i:s"),
+            "visitors" => $visitorCount ?? 0
+        ]);
+        exit;
     }
-
-    $meminfo = file_get_contents("/proc/meminfo");
-    preg_match('/MemTotal:\s+(\d+)/', $meminfo, $total);
-    preg_match('/MemAvailable:\s+(\d+)/', $meminfo, $available);
-
-    $totalMem = $total[1] ?? 1;
-    $freeMem = $available[1] ?? 0;
-    $ramPercent = round((($totalMem - $freeMem) / $totalMem) * 100, 1);
-
-    $diskTotal = disk_total_space("/");
-    $diskFree = disk_free_space("/");
-    $diskPercent = round((($diskTotal - $diskFree) / $diskTotal) * 100, 1);
-
-    $uptime = shell_exec("uptime -p");
-    $kernel = php_uname('r');
-
-    echo json_encode([
-        "cpu" => getCPU(),
-        "ram" => $ramPercent,
-        "disk" => $diskPercent,
-        "uptime" => trim($uptime),
-        "kernel" => $kernel,
-        "time" => date("H:i:s")
-    ]);
-    exit;
-}
 ?>
 
 <!DOCTYPE html>
@@ -126,6 +137,7 @@ if (isset($_GET['data'])) {
                         <p><span class="prompt">Uptime:</span> <span id="uptimeText">...</span></p>
                         <p><span class="prompt">Server Time:</span> <span id="timeText">...</span></p>
                         <p><span class="prompt">Status:</span> <span style="color: #50fa7b;">Online</span></p>
+                        <p><span class="prompt">Visitors:</span> <span id="visitorCount">...</span></p>
                     </div>
                 </div>
             </div>
