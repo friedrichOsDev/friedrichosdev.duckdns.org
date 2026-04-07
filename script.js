@@ -1,4 +1,7 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
+    const path = window.location.pathname;
+    if (!path.endsWith("index.php") && path !== "/" && path !== "") return;
+
     const github_lang_links = {
         "asm": "https://github.com/friedrichOsDev?tab=repositories&q=&language=assembly&type=source",
         "c": "https://github.com/friedrichOsDev?tab=repositories&q=&language=c&type=source",
@@ -8,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
         "js": "https://github.com/friedrichOsDev?tab=repositories&q=&language=javascript&type=source"
     };
 
-    document.addEventListener("click", function(e) {
+    document.addEventListener("click", function (e) {
         for (const [lang, link] of Object.entries(github_lang_links)) {
             if (e.target && e.target.classList.contains(`language-${lang}`)) {
                 window.open(link, '_blank');

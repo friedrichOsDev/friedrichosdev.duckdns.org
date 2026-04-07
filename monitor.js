@@ -22,11 +22,11 @@ async function updateStats() {
 function updateDisplay(id, value) {
     const textEl = document.getElementById(id + "Text");
     const barEl = document.getElementById(id + "Bar");
-    
+
     if (textEl && barEl) {
         animateValue(textEl, value);
         barEl.style.width = value + "%";
-        
+
         if (value > 85) barEl.style.background = "#ff5f56";
         else if (value > 60) barEl.style.background = "#ffbd2e";
         else barEl.style.background = "linear-gradient(90deg, #50fa7b, #8be9fd)";
