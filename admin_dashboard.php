@@ -21,11 +21,11 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
     <header class="header">
         <p>Admin Dashboard</p>
         <div>
-            <a class="button-link header-link-active" href="index.php">Home</a>
+            <a class="button-link" href="index.php">Home</a>
             <a class="button-link" href="projects.html">Projects</a>
             <a class="button-link" href="monitor.php">Monitor</a>
             <a class="button-link" href="contact.html">Contact</a>
-            <a class="button-link header-link-last" href="login.php">Login</a>
+            <a class="button-link header-link-active header-link-last" href="login.php">Dashboard</a>
         </div>
     </header>
     <main>
