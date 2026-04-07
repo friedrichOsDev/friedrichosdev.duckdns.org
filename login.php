@@ -1,5 +1,11 @@
 <?php
 session_start();
+
+if (isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] === true) {
+    header("Location: admin_dashboard.php");
+    exit;
+}
+
 require_once('/var/www/db_config.php');
 
 $error = "No Error Detected";
@@ -44,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </header>
     <main>
-        <section class="about-section">
+        <section class="login-section">
             <div class="terminal-window">
                 <div class="terminal-header">
                     <span class="dot red"></span>

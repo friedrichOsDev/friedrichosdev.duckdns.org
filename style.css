@@ -556,6 +556,12 @@ body {
 /**
  * login.php
  */
+
+.login-section {
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
  
 .response-input {
     margin: 10px 0 10px 10px;
