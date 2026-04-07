@@ -219,6 +219,12 @@ body {
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    font-family: "Courier New", Courier, monospace;
+    transition: transform 0.2s ease;
+}
+
+.terminal-window:hover {
+    transform: translateY(-5px);
 }
 
 .terminal-header {
