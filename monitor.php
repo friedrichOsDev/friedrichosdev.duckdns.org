@@ -39,6 +39,7 @@
         $kernel = php_uname('r');
 
         require_once('/var/www/db_config.php');
+        $visitorCount = 0;
         try {
             $pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
             $stmt = $pdo->query("SELECT SUM(count) as total FROM visitors");
@@ -54,7 +55,7 @@
             "uptime" => trim($uptime),
             "kernel" => $kernel,
             "time" => date("H:i:s"),
-            "visitors" => $visitorCount ?? 0
+            "visitors" => $visitorCount
         ]);
         exit;
     }

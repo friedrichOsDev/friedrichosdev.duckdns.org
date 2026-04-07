@@ -19,6 +19,7 @@
         echo json_encode([
             "status" => "success",
             "total_unique_ips" => count($data),
+            "total_visits" => array_sum(array_column($data, 'count')),
             "data" => $data
         ]);
 

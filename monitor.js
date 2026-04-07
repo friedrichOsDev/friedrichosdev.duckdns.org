@@ -9,7 +9,11 @@ async function updateStats() {
         document.getElementById("kernelName").innerText = data.kernel;
         document.getElementById("uptimeText").innerText = data.uptime.replace('uptime ', '');
         document.getElementById("timeText").innerText = data.time;
-        document.getElementById("visitorCount").innerText = data.visitors + " visitors";
+        if (data.visitors === 1) {
+            document.getElementById("visitorCount").innerText = data.visitors + " visitor";
+        } else {
+            document.getElementById("visitorCount").innerText = data.visitors + " visitors";
+        }
     } catch (error) {
         console.error("Monitor Error:", error);
     }
