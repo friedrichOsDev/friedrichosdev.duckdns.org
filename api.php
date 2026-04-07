@@ -4,10 +4,13 @@
 
     require_once('/var/www/db_config.php');
 
-    if (!isset($_GET['key']) || empty(MY_API_KEY) || $_GET['key'] !== MY_API_KEY) {
-        http_response_code(403);
-        echo json_encode(["status" => "error", "message" => "Zugriff verweigert!"]);
-        exit;
+    $public_access = false;
+    if (!$public_access) {
+        if (!isset($_GET['key']) || empty(MY_API_KEY) || $_GET['key'] !== MY_API_KEY) {
+            http_response_code(403);
+            echo json_encode(["status" => "error", "message" => "Zugriff verweigert!"]);
+            exit;
+        }
     }
 
     try {
