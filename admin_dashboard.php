@@ -102,7 +102,11 @@ try {
                                 <tbody>
                                     <?php foreach ($visitors as $visitor): ?>
                                         <tr>
-                                            <td class="ip-cell"><?php echo htmlspecialchars($visitor['ip']); ?></td>
+                                            <td class="ip-cell">
+                                                <a href="https://whatismyipaddress.com/ip/<?php echo htmlspecialchars($visitor['ip']); ?>">
+                                                    <?php echo htmlspecialchars($visitor['ip']); ?>
+                                                </a>
+                                            </td>
                                             <td class="count-cell"><?php echo htmlspecialchars($visitor['count']); ?></td>
                                             <td class="date-cell"><?php echo htmlspecialchars($visitor['last_visit']); ?></td>
                                         </tr>

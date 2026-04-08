@@ -196,6 +196,11 @@ body {
     color: var(--tag-text);
 }
 
+.ip-cell a {
+    text-decoration: none;
+    color: var(--tag-text);
+}
+
 .count-cell {
     color: var(--terminal-yellow);
 }
